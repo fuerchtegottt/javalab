@@ -1,5 +1,10 @@
 package de.g3ll3rt.StringOperator;
 
+/**
+ * @author chg
+ * sample operator implementation
+ *
+ */
 public class HelloWorldOperator implements StringOperationBase {
 
 	@Override
@@ -18,6 +23,7 @@ public class HelloWorldOperator implements StringOperationBase {
 		// TODO Auto-generated method stub
 		return "TXT";
 	}
+
 	
 	public static void main(String[] args){
 		new StringOperatorGUI(new HelloWorldOperator());
