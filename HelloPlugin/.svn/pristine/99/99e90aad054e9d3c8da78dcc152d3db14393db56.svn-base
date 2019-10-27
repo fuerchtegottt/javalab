@@ -1,0 +1,9 @@
+main: de.g3ll3rt.minecraft.plugins.HelloPlugin
+name: HelloPlugin
+version: 1.0
+author: ExampleAuthor
+description: ${project.description}
+commands:
+  cgshell:
+    description: set the sample message
+    usage: /<command> message

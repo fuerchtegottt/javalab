@@ -1,0 +1,11 @@
+http://wiki.bukkit.org/Plugin_Tutorial
+http://jd.bukkit.org/apidocs/
+
+
+    
+ commands:
+   cgs:
+      description: CG Shell Command
+      usage: /<command> [player]
+      permission: <plugin name>.basic
+      permission-message: You don't have <permission>
