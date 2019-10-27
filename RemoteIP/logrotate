@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/usr/sbin/logrotate /etc/cron/cron.d/logrotate.conf $*
+wget http://www.g3ll3rt.de/remoteip/iptest.php

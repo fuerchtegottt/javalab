@@ -1,0 +1,11 @@
+crontab -l 	Crontab-Liste einsehen
+crontab -e      Crontabliste editieren
+
+im VI:
+_______
+i 		einfügen
+esc 		Eingabe beenden
+:WQ		sichern und beenden
+:q!             nur beenden ohne Sichern
+
+*/20 * * * * /etc/cron/cron.d/remoteip.sh		alle 20 Min. Script ausführen
