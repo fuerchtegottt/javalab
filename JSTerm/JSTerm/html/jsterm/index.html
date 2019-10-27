@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+	<TITLE>JSTerm</TITLE>
+	<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript" SRC="termlib.js"></SCRIPT>
+	<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript" SRC="jsterm.js""></SCRIPT>
+
+<STYLE TYPE="text/css">
+body,p,a,td {
+	font-family: courier,fixed;
+	font-size: 12px;
+	color: #ffffff;
+}
+a,a:link,a:visited {
+	text-decoration: none;
+	color: #77dd11;
+}
+a:hover {
+	text-decoration: underline;
+	color: #77dd11;
+}
+a:active {
+	text-decoration: underline;
+	color: #dddddd;
+}
+
+.term {
+	font-family: courier,fixed;
+	font-size: 12px;
+	color: #aaccaa;
+	background: none;
+}
+
+.termReverse {
+	font-family: courier,fixed;
+	font-size: 12px;
+	color: #111111;
+	background: #aaccaa;
+}
+
+grey,.grey {
+	font-family: courier,fixed;
+	font-size: 12px;
+	color: #999999;
+}
+
+a.termopen,a.termopen:link,a.termopen:visited {
+	text-decoration: none;
+	color: #77dd11;
+	background: none;
+}
+a.termopen:hover {
+	text-decoration: none;
+	color: #222222;
+	background: #77dd11;
+}
+a.termopen:active {
+	text-decoration: none;
+	color: #222222;
+	background: #dddddd;
+}
+
+a.termopenhidden,a.termopenhidden:link,a.termopenhidden:visited {
+	text-decoration: none;
+	color: #253850;
+	background: none;
+}
+a.termopenhidden:hover {
+	text-decoration: none;
+	color: #222222;
+	background: #77dd11;
+}
+a.termopenhidden:active {
+	text-decoration: none;
+	color: #222222;
+	background: #dddddd;
+}
+h1 {
+	font-family: courier,fixed,swiss,sans-serif;
+	font-size: 18px;
+	color: #ffffff;
+}
+.lh13 {
+	line-height: 13px;
+}
+.lh15 {
+	line-height: 15px;
+}
+
+</STYLE>
+</HEAD>
+
+
+<BODY BGCOLOR="#253850" LINK="#77dd11" TEXT="#33d011" ALINK="#dddddd" VLINK="#77dd11"
+TOPMARGIN="0" BOTTOMMARGIN="0" LEFTMARGIN="0" RIGHTMARGIN="0" MARGINHEIGHT="0" MARGINWIDTH="0">
+
+<TABLE BORDER="0" CELLSPACING="10" CELLPADDING="0" WIDTH="100%">
+<TR><TD ALIGN="center"><H1>JS Terminal</H1></TD>
+</TD></TR>
+<TR><TD ALIGN="center">
+	<A HREF="javascript:termOpen()" onfocus="if(this.blur)this.blur();" onmouseover="window.status='open terminal'; return true" onmouseout="window.status=''; return true" CLASS="termopen" ID="termOpenLink">&gt; open JSTerm &nbsp;</A>
+</TD></TR>
+<TR><TD ALIGN="center" VALIGN="top" HEIGHT="370">
+	<DIV ID="termDiv" STYLE="position:relative;"></DIV>
+</TD></TR>
+
+
+</BODY>
+</HTML>
