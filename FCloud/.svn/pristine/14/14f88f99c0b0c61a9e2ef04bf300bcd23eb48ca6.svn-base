@@ -1,0 +1,24 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <form method="post" action="fcloud.php" enctype="multipart/form-data">
+	  <p> hash: <input type="text" name="hashkey"  size="10"> 
+	  <p> <textarea name="hashtext" cols="50" rows="2">... hier text rein</textarea>
+	  <input type="hidden" name="action" value="checkout">
+	  <input type="text" name="username" size= "30">
+	  <input type="text" name="password" size= "30">
+	  <p><input type="submit" name="submit" value="check out">
+	</form>
+	<hr>
+	<form method="post" action="fcloud.php" enctype="multipart/form-data">
+	  <p> hash: <input type="text" name="hashkey"  size="10"> 
+	  <p> <textarea name="hashtext" cols="50" rows="2">... hier text rein</textarea>
+	  <input type="hidden" name="action" value="checkout">
+	  <input type="text" name="username" size= "30">
+	  <input type="text" name="password" size= "30">
+	  <p><input type="submit" name="submit" value="check out">
+	</form>
+	
+  </body>
+</html>

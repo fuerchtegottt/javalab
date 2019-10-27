@@ -1,0 +1,151 @@
+/* Seitenbody */
+body.siteGlobals {
+  width: 1020px;
+  background-image: url(./background.jpg);
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+/* Auﬂenrahmen Hauptfenster */
+div.MainFrame{
+  -moz-border-radius: 0px 15px 15px 0px;
+  background-color: #333366;
+  float: left;
+  width: 550px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* Hauptfenster Innen */
+div.MainCanvas{
+  -moz-border-radius: 15px 15px 15px 15px;
+  background-color: #B1B1E6;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin:15px
+}
+
+/* Aussenrahmen Nav */
+div.NavFrame {
+  -moz-border-radius: 15px 0px 0px 0px;
+  float: left;
+  background-color: #333366;
+  width: 200px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  
+}
+
+/* Innenfl‰che Navigation */
+div.NavCanvas {
+  -moz-border-radius: 15px 15px 15px 15px;
+  font-weight: bold;
+  background-color: #B1B1E6;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+}div.Main					{							width:					1200px;							margin:					50px;							position:               absolute;							left:                   50%;							margin-left:            -600px;							margin-top:				15px;							padding:				0px;							font-family:			Arial, sans-serif;						}
+
+/* Auﬂenfl‰che Randombox */
+div.RndBoxFrame{
+  -moz-border-radius: 0px 15px 15px 0px;
+  float: left;
+  background-color: #333366;
+  width: 150px;
+}
+
+/* Einfache Inhalte, Rahmen */
+div.SimpleFrame{
+  -moz-border-radius: 15px 15px 15px 15px;
+  background-color: #000000;
+  padding-top: 1px;
+  padding-bottom: 4px;
+  padding-left: 1px;
+  padding-right: 4px; 
+  width : 80 %; 
+}
+
+/* Einfache Inhalte, Schreibfl‰che */
+div.SimpleCanvas{
+  -moz-border-radius: 0px 0px 15px 15px;
+  background-color: #FFFFFF;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px; 
+}
+
+/* Einfache Inhalte, Kopfzeile */
+div.SimpleHead {
+  text-align: center;
+  background-color: #6B84DB;
+  -moz-border-radius: 15px 15px 0px 0px;
+  font-weight: bold;
+}
+
+/* Einfache Inhalte, Kopfzeile (dunkler) */
+div.SimpleHeadDark {
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #333366;
+  -moz-border-radius: 15px 15px 0px 0px;
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* HeadMenu*/
+table.HeadTable {
+  background-color: #FFFFFF;
+  border: 0;
+}
+
+/* Sortierreihe */
+div.SortRow {
+  float: left;
+  width: 30%;
+   -moz-border-radius: 15px 15px 15px 15px;
+  background-color: #FFFFFF;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 4px; 
+}
+
+/* ‹berschriften */
+div.Headlines {
+  font-family: "Arial"; 
+  font-weight: bold;
+  font-size: 14pt; 
+  color: #413DAB;
+  text-align: center;
+}
+
+/* Blogeintr‰ge, Kommentare und G‰stebucheintr‰ge*/
+div.SiteBlog{
+  background-color: #6B84DB;
+  -moz-border-radius: 15px 15px 15px 15px;
+  font-style: italic;
+  font-weight: bold;
+  width: 80%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px; 
+  text-align: left;
+}
+
+/* HTML-Code-Console */
+textarea.SimpleConsole{
+  font-family: "Verdana";
+  text-align: left;
+   font-size: 8pt; 
+}

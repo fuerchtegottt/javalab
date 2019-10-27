@@ -1,0 +1,28 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <form action="">
+	   <p>object hash:<br><input name="hash" type="text" size="10" maxlength="10" value="#direkt">
+	   <select name="category" size="1">
+         <option>bookmarks</option>
+		 <option selected="selected" >code</option>
+		 <option>executable</option>
+		 <option>image</option>
+		 <option>message</option>
+		 <option>text</option>
+       </select>
+	   <select name="specifier" size="1">
+		 <option>public</option>
+		 <option selected="selected" >private</option>
+       </select>	   
+	   </p>
+	   <textarea name="clipbrd" cols="50" rows="10">paste text here</textarea>
+	   </p> <input name="blobfile" type="file" size="50" maxlength="100000" accept="text/*"> </p>
+	   <p><input type="submit" value=" check in ">
+	   <a href=""><img src="undo.png" width="30" height="30" border="0" alt="clear"></a>
+	   <a href="delete.html"><img src="trash.png" width="30" height="30" border="0" alt="delete"></a>
+	   </p>
+	</form>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!-- FTP-Deployment-Script... requires COMMONS and ORO for ANT -->
+<!-- http://jakarta.apache.org/oro/ -->
+<!-- http://jakarta.apache.org/commons/net/index.html -->
+<!-- code based on following tutorial: -->
+<!-- http://www.mortox.de/blog/ftp-upload-task-mit-ant-und-eclipse-zend-studio/247 -->
+
+<project name="FCloud Deployment" default="deploy">
+	<description>Fractal Cloud Data Management ONLINE</description>
+
+	<target name="deploy" description="ftp deployment">
+		<echo>deploying to ftp</echo>
+		<ftp server = "alfa3008.alfahosting-server.de"
+				 userid               = "web286"
+				 password             = "wurstwasser"
+				 remotedir            = "html/fcloud"
+				 passive              = "yes"
+				 binary               = "yes"
+				 depends              = "yes"
+				 verbose              = "yes"
+				 timestampGranularity = "NONE" >
+			<fileset dir="html/fcloud" />
+		</ftp>
+	</target>
+	<target name="showVersion" description="display project version">
+	  <echo> FCloud V0.1 </echo>
+    </target>
+</project>
