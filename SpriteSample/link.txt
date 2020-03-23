@@ -1,1 +1,2 @@
 http://zetcode.com/tutorials/javagamestutorial/movingsprites/
+http://zetcode.com/tutorials/javagamestutorial/basics/
