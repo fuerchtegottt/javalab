@@ -14,10 +14,11 @@ public class Annuity {
 	private double payRate;              // Ratenbetrag
 	private List<Month> monthList;       // Monatsabzahlung
 	
-	public Annuity(double restDebt, double ratePercent, double payRate) {
+	public Annuity(double restDebt, double ratePercent, double payRate, double unscheduledRepayment) {
 		this.debtStart = restDebt;
 		this.payRate = payRate;
 		this.ratePercent = ratePercent;
+		this.unscheduledRepayment = unscheduledRepayment;
 		calculateYear();
 	}
 	
@@ -50,13 +51,15 @@ public class Annuity {
         this.debtEnd  = this.debtStart - repaymentSum;
         this.interest = interestSum;
         
-        // Sondertilgung abziehen
-        if ( this.debtEnd > this.unscheduledRepayment ) {
-          this.debtEnd = this.debtEnd - this.unscheduledRepayment;
-        } else {
+        // Sondertilgung abziehen falls angegeben
+        if (this.unscheduledRepayment > 0) {
+          if ( this.debtEnd > this.unscheduledRepayment ) {
+            this.debtEnd = this.debtEnd - this.unscheduledRepayment;
+          } else {
         	// Sondertilgung = Restschuld
-          this.unscheduledRepayment = this.debtEnd;
-          this.debtEnd = 0;
+            this.unscheduledRepayment = this.debtEnd;
+            this.debtEnd = 0;
+          }
         }
 	}
 	
@@ -68,10 +71,10 @@ public class Annuity {
 	public String toString() {
       StringBuilder strBuilder = new StringBuilder();
       strBuilder.append("Jahr: "       + this.year );
-      strBuilder.append("Startschuld:" + round(this.debtStart,2) );
-      strBuilder.append("Abtrag:"      + round(this.repayment,2) );
-      strBuilder.append("Zinsen:"      + round(this.interest,2) );
-      strBuilder.append("Restschuld:"  + round(this.debtEnd,2) );
+      strBuilder.append("Startschuld:" + getDebtStart() );
+      strBuilder.append("Abtrag:"      + getRepayment() );
+      strBuilder.append("Zinsen:"      + getInterest() );
+      strBuilder.append("Restschuld:"  + getDebtEnd() );
       //strBuilder.append("\n");
       
       return strBuilder.toString();
@@ -85,31 +88,31 @@ public class Annuity {
 		this.year = year;
 	}
 	public double getDebtStart() {
-		return debtStart;
+		return round(debtStart,2);
 	}
 	public void setDebtStart(double debtStart) {
 		this.debtStart = debtStart;
 	}
 	public double getDebtEnd() {
-		return debtEnd;
+		return round(debtEnd, 2);
 	}
 	public void setDebtEnd(double debtEnd) {
 		this.debtEnd = debtEnd;
 	}
 	public double getRepayment() {
-		return repayment;
+		return round(repayment, 2);
 	}
 	public void setRepayment(double repayment) {
 		this.repayment = repayment;
 	}
 	public double getInterest() {
-		return interest;
+		return round(interest, 2);
 	}
 	public void setInterest(double interest) {
 		this.interest = interest;
 	}
 	public double getUnscheduledRepayment() {
-		return unscheduledRepayment;
+		return round(unscheduledRepayment, 2);
 	}
 	public void setUnscheduledRepayment(double unscheduledRepayment) {
 		this.unscheduledRepayment = unscheduledRepayment;

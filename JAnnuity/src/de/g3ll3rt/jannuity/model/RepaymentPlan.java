@@ -27,7 +27,7 @@ public class RepaymentPlan {
 	  int nextYear    = credit.getStartYear();
 	  
 	  while(restDebt > 0) {
-		  Annuity annuity = this.calculateAnnuity(restDebt, nextYear, credit.getRatePercent(), credit.getPayRate());
+		  Annuity annuity = this.calculateAnnuity(restDebt, nextYear, credit.getRatePercent(), credit.getPayRate(), credit.getUnscheduledRepaymentRate());
 		  this.annuityList.add(annuity);
 	      restDebt = annuity.getDebtEnd();
 	      nextYear = annuity.getYear() + 1;
@@ -35,8 +35,8 @@ public class RepaymentPlan {
 	  return this.annuityList;	  
   }
 
-  public Annuity calculateAnnuity(double restDebt, int year, double ratePercent, double payRate ) {
-	  Annuity annuity = new Annuity(restDebt, ratePercent, payRate );
+  public Annuity calculateAnnuity(double restDebt, int year, double ratePercent, double payRate, double unscheduledRepayment ) {
+	  Annuity annuity = new Annuity(restDebt, ratePercent, payRate, unscheduledRepayment );
 	  annuity.setYear(year);
 	  
 	  return annuity;	  

@@ -54,4 +54,14 @@ public class Credit {
 		}
 		return true;
 	}
+	
+	public static Credit getSampleCredit() {
+		Credit c1 = new Credit();
+		c1.setPayRate(650);
+		c1.setRatePercent(1.05);
+		c1.setStartYear(2020);
+		c1.setTotalDebt(150000);
+		c1.setUnscheduledRepaymentRate(3200);
+		return c1;
+	}
 }
