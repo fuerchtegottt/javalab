@@ -1,7 +1,0 @@
-SCREEN 2
-FOR m! = 10 TO 160 STEP 5
-LINE (100, 100)-(m!, 150)
-NEXT
-
-
-
