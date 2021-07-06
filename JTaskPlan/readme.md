@@ -1,6 +1,9 @@
 # JTaskPlan
 
-# Description: lightweight task planer (productivity tool)
+# Description: 
+lightweight task planer (productivity tool)
+
+![Screenshot](/img/screenshot.jpg)
 
 **Christian Gellert**
 
