@@ -23,6 +23,7 @@ simple java example for swing based gui, JTable and basic file operations
 - [x] base implementation
 - [ ] implement status bar
 - [ ] add javadoc
+- [ ] use dedicated icon
 
 **Christian Gellert**
 
