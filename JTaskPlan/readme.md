@@ -3,7 +3,7 @@
 # Description: 
 lightweight task planer (productivity tool)
 
-![Screenshot](./JTaskPlan/img/screenshot.jpg)
+![Screenshot](img/screenshot.jpg)
 
 **Christian Gellert**
 
