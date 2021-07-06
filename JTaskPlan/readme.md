@@ -3,6 +3,13 @@
 # Description: 
 lightweight task planer (productivity tool)
 
+## technology
+* J2SE
+	* SWING GUI
+	* JTable
+	* proprietary CSV parser / writer
+	
+
 ![Screenshot](img/screenshot.jpg)
 
 **Christian Gellert**
