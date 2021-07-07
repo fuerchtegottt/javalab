@@ -9,18 +9,37 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class DeviceController {
 	private final String propertiesFilename = "denonRC.properties";
 	private String ip;
 	private String protocol;
-	private String commandZone2On;
-	private String commandZone2Off;
 	private boolean debug = false;
 	public static void main(String[] args) {
 		DeviceController dc = new DeviceController();
-		dc.setDebugMode(true);
-		dc.setZone2(true);
+		
+		try {
+			/*
+		  dc.setDebugMode(true);
+		  dc.setZone2(true);
+		  dc.setZone2Volume(5);
+		  dc.setZone2Favorite(2);
+		  TimeUnit.SECONDS.sleep(1);
+		  dc.setZone2Volume(10);
+		  TimeUnit.SECONDS.sleep(1);
+		  dc.setZone2Volume(15);
+		  TimeUnit.SECONDS.sleep(1);
+		  dc.setZone2Volume(20);
+		  TimeUnit.SECONDS.sleep(1);
+		  dc.setZone2Volume(25);
+		  TimeUnit.SECONDS.sleep(1);
+		  dc.setZone2Volume(30);
+		  */
+		  dc.setZone2Favorite(2);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	public DeviceController() {
@@ -55,7 +74,7 @@ public class DeviceController {
 	}
 	
 	private String getUrlString(String command) {
-		return this.protocol + "://" + this.ip + command;
+		return this.protocol + "://" + this.ip + APICommand.apiCallPath + command;
 	}
 	
 	public Properties writeDefaultProps() {
@@ -65,8 +84,6 @@ public class DeviceController {
 			prop = new Properties();
 			prop.setProperty("rc.ip"        , "192.168.2.25");
 			prop.setProperty("rc.protocol"  , "http");
-			prop.setProperty("rc.commandZone2On" , "/goform/formiPhoneAppDirect.xml?Z2ON");
-			prop.setProperty("rc.commandZone2Off", "/goform/formiPhoneAppDirect.xml?Z2OFF");
 			prop.save(output, "denon remote connection settings");
 		} catch (IOException io) {
             io.printStackTrace();
@@ -76,9 +93,42 @@ public class DeviceController {
 	
 	public void setZone2(boolean switchOn) {
 		if (switchOn) {
-		executeCommand( this.commandZone2On);
+		executeCommand( APICommand.Z2ON);
 		} else {
-			executeCommand( this.commandZone2Off);
+			executeCommand( APICommand.Z2ON);
+		}
+	}
+	
+	public void setZone2Volume(int volume) {
+		String volCommand;
+		int newVol = volume;
+		if ( newVol < 0 || newVol > 100 ) {
+			newVol = 15;
+		}
+		
+		if ( newVol < 10 ) {
+			volCommand = APICommand.Z2VOL + "0" + newVol;
+		} else {
+			volCommand = APICommand.Z2VOL + newVol;
+		}
+		
+		executeCommand( volCommand);
+	}
+	
+	public void setZone2Favorite(int fav) {
+		switch(fav) {
+		case 1:
+			executeCommand( APICommand.Z2FAVORITE1);
+			break;
+		case 2:
+			executeCommand( APICommand.Z2FAVORITE2);
+			break;
+		case 3:
+			executeCommand( APICommand.Z2FAVORITE3);
+			break;
+		default:
+			executeCommand( APICommand.Z2FAVORITE1);
+			break;	
 		}
 	}
 	
@@ -99,8 +149,6 @@ public class DeviceController {
         	try {
         	  this.ip = prop.getProperty("rc.ip");
         	  this.protocol   = prop.getProperty("rc.protocol");
-        	  this.commandZone2On  = prop.getProperty("rc.commandZone2On");
-        	  this.commandZone2Off = prop.getProperty("rc.commandZone2Off");
         	} catch (Exception e) {
         		e.printStackTrace();
         	}
