@@ -19,11 +19,14 @@ public class JDenonShell {
 		} else {
 			shell.parseArgs(args);
 		}
-		
 	}
 	
 	public void parseArgs(String[] args) {
-		
+	    StringBuilder str = new StringBuilder();
+		for(int i = 0; i< args.length; i++) {
+			str.append(args[i] + " ");
+		}
+		toConsole(parseString(str.toString()));
 	}
 	
 	public String parseString(String command) {
@@ -40,25 +43,48 @@ public class JDenonShell {
 			message = getVersionInfo();
 		    break;
 	    default:
-	    	message = "command '" + command + "' not found. \n \r" + getCommandList();
+	    	try {
+	    	if (command.substring(0,4).equals("call")){
+	    		message = parseCall(command);
+	    	} else {
+		    	message = "command '" + command + "' not found. \n \r" + getCommandList();	
+	    	}
+	    	}catch(StringIndexOutOfBoundsException e) {
+	    		message = "command not found";
+	    	}
+	    	break;
+	    	
 		}
 	    	
 		return message;
+	}
+	
+	public String parseCall(String callString) {
+		String output;
+		String cmd;
+		try {
+		  cmd = callString.substring(5);	
+		  output = "  ..sending command " + cmd;
+		  cntl.executeCommand(cmd);
+		} catch(StringIndexOutOfBoundsException e) {
+			output = "call needs to be followed by a command \n \r" + getCommandList();
+		}
+		return output;
 	}
 	
 	public void callShell() {
 		String commandString;
 		String output;
 		Scanner in = new Scanner(System.in);
-		System.out.println("");
-		System.out.println("Welcome to JDenon CLI");
+		toConsole("");
+		toConsole("Welcome to JDenon CLI");
         do{
         	System.out.print("JDenon:\\> ");
             commandString = in.nextLine();
             output = parseString(commandString);
-            System.out.println(output);
+            toConsole(output);
         }while(!leaveShell); 
-
+        in.close();
 	}
 	
 	public String getVersionInfo() {
@@ -72,6 +98,20 @@ public class JDenonShell {
 	  str.append("Command List: \n ");
 	  str.append("help - command list \n ");
 	  str.append("ver  - version info \n ");
+	  str.append("call - call command \n");
+	  str.append("\n");
+	  str.append("commands: \n");
+	  str.append("Z2ON / OFF   (switch on / off receiver) \n");
+	  str.append("Z2CD         (switch to source CD) \n" );
+	  str.append("Z2IRP        (switch to source Internet Radio Player) \n");
+	  str.append("Z2##         (set volume in percentage 00 - 99) \n");
+	  str.append("Z2MUON / OFF (mute on / off) \n");
+	  str.append("Z2FAVORITE#  (switch to favorite 1 - 3) \n");
 	  return str.toString();
+	}
+	
+	public void toConsole(String inString) {
+		//placeholder for better output option
+		System.out.println(inString);
 	}
 }

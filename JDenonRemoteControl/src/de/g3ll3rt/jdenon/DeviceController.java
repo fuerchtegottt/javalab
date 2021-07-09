@@ -11,35 +11,39 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+
+/**
+ * Denon 2113 AVR web api wrapper
+ * 
+ *  supported commands:
+ *  Z2ON / OFF   (switch on / off receiver)
+ *  Z2CD         (switch to source CD)
+ *  Z2IRP        (switch to source Internet Radio Player)
+ *  Z2##         (set volume in percentage 00 - 99)
+ *  Z2MUON / OFF (mute on / off)
+ *  Z2FAVORITE#  (switch to favorite 1 - 3)
+ * @author chg
+ *
+ */
 public class DeviceController {
-	private final String propertiesFilename = "denonRC.properties";
+	public static final String apiCallPath = "/goform/formiPhoneAppDirect.xml?";
+	public static final String Z2ON  = "Z2ON";
+	public static final String Z2OFF = "Z2OFF";
+	public static final String Z2VOL = "Z2";     //Z2##
+	public static final String Z2FAVORITE1 = "Z2FAVORITE1";
+	public static final String Z2FAVORITE2 = "Z2FAVORITE2";
+	public static final String Z2FAVORITE3 = "Z2FAVORITE3";
+	
+	private static final String propertiesFilename = "denonRC.properties";
 	private String ip;
 	private String protocol;
 	private boolean debug = false;
 	public static void main(String[] args) {
 		DeviceController dc = new DeviceController();
-		
-		try {
-			/*
+
 		  dc.setDebugMode(true);
 		  dc.setZone2(true);
-		  dc.setZone2Volume(5);
 		  dc.setZone2Favorite(2);
-		  TimeUnit.SECONDS.sleep(1);
-		  dc.setZone2Volume(10);
-		  TimeUnit.SECONDS.sleep(1);
-		  dc.setZone2Volume(15);
-		  TimeUnit.SECONDS.sleep(1);
-		  dc.setZone2Volume(20);
-		  TimeUnit.SECONDS.sleep(1);
-		  dc.setZone2Volume(25);
-		  TimeUnit.SECONDS.sleep(1);
-		  dc.setZone2Volume(30);
-		  */
-		  dc.setZone2Favorite(2);
-		} catch(Exception e){
-			e.printStackTrace();
-		}
 	}
 	
 	public DeviceController() {
@@ -49,7 +53,7 @@ public class DeviceController {
 	public void setDebugMode(boolean debug) {
 		this.debug = debug;
 	}
-	private void executeCommand(String command) {
+	public void executeCommand(String command) {
 		String urlString = getUrlString(command);
 		InputStream result;
 		if (debug) {
@@ -74,7 +78,7 @@ public class DeviceController {
 	}
 	
 	private String getUrlString(String command) {
-		return this.protocol + "://" + this.ip + APICommand.apiCallPath + command;
+		return this.protocol + "://" + this.ip + apiCallPath + command;
 	}
 	
 	public Properties writeDefaultProps() {
@@ -91,11 +95,19 @@ public class DeviceController {
 		return prop;
 	}
 	
+	public void sleep(int sec) {
+		try {
+		  TimeUnit.SECONDS.sleep(sec);
+		} catch(Exception e) {
+			//do nothing
+		}
+	}
+	
 	public void setZone2(boolean switchOn) {
 		if (switchOn) {
-		executeCommand( APICommand.Z2ON);
+		executeCommand( Z2ON);
 		} else {
-			executeCommand( APICommand.Z2ON);
+			executeCommand( Z2ON);
 		}
 	}
 	
@@ -107,9 +119,9 @@ public class DeviceController {
 		}
 		
 		if ( newVol < 10 ) {
-			volCommand = APICommand.Z2VOL + "0" + newVol;
+			volCommand = Z2VOL + "0" + newVol;
 		} else {
-			volCommand = APICommand.Z2VOL + newVol;
+			volCommand = Z2VOL + newVol;
 		}
 		
 		executeCommand( volCommand);
@@ -118,16 +130,16 @@ public class DeviceController {
 	public void setZone2Favorite(int fav) {
 		switch(fav) {
 		case 1:
-			executeCommand( APICommand.Z2FAVORITE1);
+			executeCommand( Z2FAVORITE1);
 			break;
 		case 2:
-			executeCommand( APICommand.Z2FAVORITE2);
+			executeCommand( Z2FAVORITE2);
 			break;
 		case 3:
-			executeCommand( APICommand.Z2FAVORITE3);
+			executeCommand( Z2FAVORITE3);
 			break;
 		default:
-			executeCommand( APICommand.Z2FAVORITE1);
+			executeCommand( Z2FAVORITE1);
 			break;	
 		}
 	}
