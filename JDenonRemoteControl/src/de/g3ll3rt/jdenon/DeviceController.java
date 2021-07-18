@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.StringWriter;
 import java.net.URL;
 import java.util.Properties;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 
@@ -27,6 +29,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class DeviceController {
 	public static final String apiCallPath = "/goform/formiPhoneAppDirect.xml?";
+	public static final String stateCallPath = "/goform/formZone2_Zone2XmlStatusLite.xml";
 	public static final String Z2ON  = "Z2ON";
 	public static final String Z2OFF = "Z2OFF";
 	public static final String Z2VOL = "Z2";     //Z2##
@@ -53,14 +56,18 @@ public class DeviceController {
 	public void setDebugMode(boolean debug) {
 		this.debug = debug;
 	}
-	public void executeCommand(String command) {
+	public String executeCommand(String command) {
 		String urlString = getUrlString(command);
+		System.out.println(urlString);
+		String resultString = "";
 		InputStream result;
 		if (debug) {
 		  System.out.println("dc calling: " + urlString);
 		}
 		try {
 		result = new URL(urlString).openStream();
+		Scanner s = new Scanner(result).useDelimiter("\\A");
+		resultString = s.hasNext() ? s.next() : "";
 		
 		if(debug) {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(result));
@@ -75,10 +82,15 @@ public class DeviceController {
 		} catch(IOException io) {
 			io.printStackTrace();
 		}
+		return resultString;
 	}
 	
 	private String getUrlString(String command) {
-		return this.protocol + "://" + this.ip + apiCallPath + command;
+		if ( command.equals("state")) {
+		  return this.protocol + "://" + this.ip + stateCallPath;
+		} else {
+		  return this.protocol + "://" + this.ip + apiCallPath + command;
+		}
 	}
 	
 	public Properties writeDefaultProps() {
@@ -93,6 +105,10 @@ public class DeviceController {
             io.printStackTrace();
         }
 		return prop;
+	}
+	
+	public String getState() {
+		return executeCommand("state");
 	}
 	
 	public void sleep(int sec) {

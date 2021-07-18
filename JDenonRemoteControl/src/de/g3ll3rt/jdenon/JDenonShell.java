@@ -42,6 +42,9 @@ public class JDenonShell {
 		case "ver":
 			message = getVersionInfo();
 		    break;
+		case "state":
+			message = getState();
+			break;
 	    default:
 	    	try {
 	    	if (command.substring(0,4).equals("call")){
@@ -57,6 +60,10 @@ public class JDenonShell {
 		}
 	    	
 		return message;
+	}
+	
+	public String getState() {
+		return cntl.getState();
 	}
 	
 	public String parseCall(String callString) {
@@ -96,9 +103,11 @@ public class JDenonShell {
 	public String getCommandList() {
 	  StringBuilder str = new StringBuilder();
 	  str.append("Command List: \n ");
-	  str.append("help - command list \n ");
-	  str.append("ver  - version info \n ");
-	  str.append("call - call command \n");
+	  str.append("help  - command list \n ");
+	  str.append("ver   - version info \n ");
+	  str.append("state - get avr state xml \n ");
+	  str.append("call  - call command \n");
+	  str.append("exit  - kill CLI \n");
 	  str.append("\n");
 	  str.append("commands: \n");
 	  str.append("Z2ON / OFF   (switch on / off receiver) \n");
