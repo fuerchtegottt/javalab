@@ -31,9 +31,8 @@ control your DENON AVR via http network commands
 ## task backlog
 - [x] base implementation of api (zone2 on/off)
 - [ ] use URI-Builder class
-- [ ] add command class
-- [ ] add cli param parser
-- [ ] add cli interactive mode
+- [x] add cli param parser
+- [x] add cli interactive mode
 - [ ] add javadoc
 
 **Christian Gellert**
