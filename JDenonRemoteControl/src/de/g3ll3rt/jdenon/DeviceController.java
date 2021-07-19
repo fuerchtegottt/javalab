@@ -58,7 +58,6 @@ public class DeviceController {
 	}
 	public String executeCommand(String command) {
 		String urlString = getUrlString(command);
-		System.out.println(urlString);
 		String resultString = "";
 		InputStream result;
 		if (debug) {
