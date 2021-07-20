@@ -1,5 +1,5 @@
 # JDenon
-![LOGO](img/JDenonLogo.jpg)
+![LOGO](img/JDenonLogo.jpg) | ![LOGO](img/screenshot.jpg)
 
 # Description 
 java based access layer to DENON AVR 2113 (and compatible) using denon web api

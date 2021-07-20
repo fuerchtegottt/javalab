@@ -102,20 +102,20 @@ public class JDenonShell {
 	
 	public String getCommandList() {
 	  StringBuilder str = new StringBuilder();
-	  str.append("Command List: \n ");
+	  str.append("Keywords: \n");
 	  str.append(" help  - command list \n");
 	  str.append(" ver   - version info \n");
 	  str.append(" state - get avr state xml \n");
 	  str.append(" call  - call command \n");
 	  str.append(" exit  - kill CLI \n");
 	  str.append("\n");
-	  str.append("commands: \n");
-	  str.append("Z2ON / OFF   (switch on / off receiver) \n");
-	  str.append("Z2CD         (switch to source CD) \n" );
-	  str.append("Z2IRP        (switch to source Internet Radio Player) \n");
-	  str.append("Z2##         (set volume in percentage 00 - 99) \n");
-	  str.append("Z2MUON / OFF (mute on / off) \n");
-	  str.append("Z2FAVORITE#  (switch to favorite 1 - 3) \n");
+	  str.append("Commands: \n");
+	  str.append(" Z2ON / OFF   (switch on / off receiver) \n");
+	  str.append(" Z2CD         (switch to source CD) \n" );
+	  str.append(" Z2IRP        (switch to source Internet Radio Player) \n");
+	  str.append(" Z2##         (set volume in percentage 00 - 99) \n");
+	  str.append(" Z2MUON / OFF (mute on / off) \n");
+	  str.append(" Z2FAVORITE#  (switch to favorite 1 - 3) \n");
 	  return str.toString();
 	}
 	
