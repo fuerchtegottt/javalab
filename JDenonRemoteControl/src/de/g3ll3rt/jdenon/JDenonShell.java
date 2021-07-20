@@ -103,11 +103,11 @@ public class JDenonShell {
 	public String getCommandList() {
 	  StringBuilder str = new StringBuilder();
 	  str.append("Command List: \n ");
-	  str.append("help  - command list \n ");
-	  str.append("ver   - version info \n ");
-	  str.append("state - get avr state xml \n ");
-	  str.append("call  - call command \n");
-	  str.append("exit  - kill CLI \n");
+	  str.append(" help  - command list \n");
+	  str.append(" ver   - version info \n");
+	  str.append(" state - get avr state xml \n");
+	  str.append(" call  - call command \n");
+	  str.append(" exit  - kill CLI \n");
 	  str.append("\n");
 	  str.append("commands: \n");
 	  str.append("Z2ON / OFF   (switch on / off receiver) \n");
