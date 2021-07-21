@@ -1,5 +1,5 @@
 # XMLBlog
-![LOGO](img/screenshot.jpg)
+![LOGO](img/screenshot.png)
 
 # Description 
 html/xml based lightweight blog
