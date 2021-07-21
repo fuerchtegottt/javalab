@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet href="blog.xsl" type="text/xsl" ?>
+<blog title ="blog title">
+  <entry>
+    <title>entry title</title>
+	<date>20.07.2021</date>
+	<descr>
+	long description for the blog entry.
+	</descr>
+	<code>
+	  System.out.println("Hallo Welt");
+	  GOTO 10
+	</code>
+	<hyperlink>http://www.g3ll3rt.de</hyperlink>
+	<eimage>./test.jpg</eimage>
+  </entry>
+  <entry>
+    <title>2.nd entry</title>
+	<date>21.07.2021</date>
+	<descr>
+	yet another long description text
+	</descr>
+	<eimage>./test.jpg</eimage>
+  </entry>  
+</blog>
