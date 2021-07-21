@@ -2,7 +2,7 @@
   $host = "localhost";
   $dbname = "#dbname";
   $user = "#username";
-  $pw = "#password";
+  $pw = "#password ";
   $connect = @mysql_connect($host, $user, $pw);
   $sql_string = "SELECT value FROM `web_prop` where `key` = 'IP'";
   $result = @mysql_db_query($dbname,$sql_string, $connect);
