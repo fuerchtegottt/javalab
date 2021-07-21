@@ -2,7 +2,7 @@
 ![LOGO](img/screenshot.png)
 
 # Description 
-http/xml based lightweight blog 
+https/xml based lightweight blog 
 
 ## purpose
 pattern can  be used to create a simple blog based on an xml data source
