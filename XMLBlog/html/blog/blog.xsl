@@ -28,6 +28,9 @@
 		 </div>
          </xsl:for-each>
 	 </div>
+     <div class = "footer">
+       <a href = "https://github.com/fuerchtegottt/javalab/tree/master/XMLBlog" > powered by BlogKit Design </a>
+     </div>	 
      </body>
      </html>
 </xsl:template>
