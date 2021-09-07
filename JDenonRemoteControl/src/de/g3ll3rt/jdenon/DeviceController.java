@@ -120,9 +120,9 @@ public class DeviceController {
 	
 	public void setZone2(boolean switchOn) {
 		if (switchOn) {
-		executeCommand( Z2ON);
+		    executeCommand( Z2ON);
 		} else {
-			executeCommand( Z2ON);
+			executeCommand( Z2OFF);
 		}
 	}
 	
