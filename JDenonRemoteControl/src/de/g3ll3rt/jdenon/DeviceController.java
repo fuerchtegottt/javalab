@@ -107,7 +107,7 @@ public class DeviceController {
 	}
 	
 	public String getState() {
-		return executeCommand("state");
+		return executeCommand("state"); 
 	}
 	
 	public void sleep(int sec) {
