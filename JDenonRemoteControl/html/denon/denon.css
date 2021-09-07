@@ -1,0 +1,14 @@
+
+body{
+ 	background-image: url("logo.jpg"); 
+    	color: black;
+ 	background-size:cover;
+}
+
+.window{
+  font-size: 4em;
+  line-height: 1.7;
+  margin-left: 1em;
+  background-color: white;
+  opacity: 0.5;
+}
