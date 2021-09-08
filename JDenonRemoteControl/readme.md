@@ -1,5 +1,5 @@
 # JDenon
-![LOGO](img/JDenonLogo.jpg) | ![LOGO](img/screenshot.jpg)
+![LOGO](img/JDenonLogo.jpg) | ![LOGO](img/screenshot.jpg) | ![LOGO](img/mobileWebsite.jpg)
 
 # Description 
 java based access layer to DENON AVR 2113 (and compatible) using denon web api
@@ -10,6 +10,7 @@ control your DENON AVR via http network commands
 ## features
 * api class for simple avr operations (focus on zone 2)
 * command line interface (CLI) for console access or os scripting
+* mobile first - web interface (prototype)
 	
 ## technology
 * J2SE
