@@ -1,7 +1,7 @@
 package de.g3ll3rt.jpachisi.strategy;
 
 public enum TokenSituation {
-	MOVE,      // simple move
+	MOVE,      // simple move.
 	ATTACK,    // opponent token on target field
 	HUNTING,   // opponent nearby (in front)
 	INSHELTER, // token is in shelter
