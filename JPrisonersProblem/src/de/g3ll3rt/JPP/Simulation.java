@@ -10,14 +10,13 @@ import java.util.Random;
  *  
  */
 public class Simulation {
-	private static final int STRATEGY_FOLLOW = 0;
 	private int[] boxArray;
 	private int[] randomOrder;
 	private int prisonerCnt = 100;
 	private int tryCnt      = 50;
 	private int lastTag     = -1;
 	public static int STRATEGY_RANDOM = 0;
-	public static int STRATEGY_FOLOW = 1;
+	public static int STRATEGY_FOLLOW = 1;
 	private int strategy = STRATEGY_RANDOM;
 	private int lostCnt = 0;
 	private int wonCnt = 0;
@@ -61,7 +60,7 @@ public class Simulation {
 		  found = false;
 		  lastTag = - 1;
 		  for (int prisonerTry = 0; prisonerTry < tryCnt; prisonerTry++ ) {
-			if (strategy == STRATEGY_FOLOW) {
+			if (strategy == STRATEGY_FOLLOW) {
 	          nextBox = getNextBoxByFlow(prisonerNo);
 			} else {
 			  nextBox = getNextBoxByRandomOrder(prisonerTry);	
@@ -184,15 +183,17 @@ public class Simulation {
 	  }
 	}
 	
+	public void doSingleTest(int inStrategy) {
+        setStrategy(inStrategy);
+        System.out.println(writeBoxes());
+        runSimulation();
+        System.out.println(writeStats());
+	}
+	
 	public static void main(String[] args) {
 		Simulation sim = new Simulation(100, 50);
 
-        //sim.doMassTest(Simulation.STRATEGY_FOLOW);
-        
-        Simulation sim2 = new Simulation(10, 5);
-        sim2.setStrategy(STRATEGY_FOLLOW);
-        System.out.println(sim2.writeBoxes());
-        sim2.runSimulation();
-        System.out.println(sim2.writeStats());
+        sim.doMassTest(Simulation.STRATEGY_FOLLOW);
+        //sim.doSingleTest(STRATEGY_FOLLOW);
 	}	
 }
