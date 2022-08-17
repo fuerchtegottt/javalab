@@ -1,5 +1,5 @@
 # JPrisonersProblem
-![LOGO](img/logo.jpg)
+![LOGO](IMG/logo.jpg)
 *image from dalle-mini (https://www.craiyon.com/)*
 
 # Description 
