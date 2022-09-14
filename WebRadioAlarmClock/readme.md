@@ -27,7 +27,7 @@ build your own web radio alarm clock based on volumio server
 
 ## sample calls for CRON
 ```
-* bash alarm.sh wd off    #alarm on week days NEWS
+* bash alarm.sh wd off    #alarm on week days OFF
 * bash alarm.sh wd music  #alarm on week days MUSIC
 * bash alarm.sh wd news   #alarm on week days NEWS
 ```

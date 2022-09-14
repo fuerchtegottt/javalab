@@ -1,6 +1,6 @@
-#!/bin/bash VOLUMIO ALARM Controller V1.2 parameter1: [wd|we|aw] weekday
-# or weekend or always parameter2: [music|news|off] play music or news
-# or stop playback
+#!/bin/bash VOLUMIO ALARM Controller V1.2 
+# parameter1: [wd|we|aw] weekday or weekend or always 
+# parameter2: [music|news|off] play music or news or stop playback
 #
 execute_command( ) {
   if [ $2 == "music" ]
