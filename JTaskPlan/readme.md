@@ -1,5 +1,4 @@
-# JTaskPlan
-![Icon](img/ico.gif)
+# ![Icon](img/ico.gif) JTaskPlan
 # Description 
 lightweight JAVA task planner (productivity tool)
 
@@ -12,9 +11,9 @@ simple java example for swing based gui, JTable and basic file operations
 * check / uncheck task
 * switch view (active tasks / archive)
 * Command Line Interface featuring
-- adding tasks
-- checking / unchecking tasks
-- writing active tasks to console
+  * adding tasks
+  * checking / unchecking tasks
+  * writing active tasks to console
 
 ## example CLI calls:
 ```
@@ -29,9 +28,9 @@ java -jar todo.jar -v            ::(show build version)
 	
 ## technology
 * J2SE
-	* SWING GUI
-	* JTable
-	* proprietary CSV parser / writer
+  * SWING GUI
+  * JTable
+  * proprietary CSV parser / writer
 
 ![Screenshot](img/screenshot.jpg)
 
