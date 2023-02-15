@@ -17,13 +17,15 @@ simple java example for swing based gui, JTable and basic file operations
 - writing active tasks to console
 
 ## example CLI calls:
-java -jar todo.jar -l            (print active task list)
-java -jar todo.jar -a blahblahb  (add a new task)
-java -jar todo.jar -c 4 X        (check task id 4)
-java -jar todo.jar -c 4          (uncheck task id 4)
-java -jar todo.jar -g            (open gui window)
-java -jar todo.jar -h            (print online help)
-java -jar todo.jar -v            (show build version)
+```
+java -jar todo.jar -l            ::(print active task list)
+java -jar todo.jar -a blahblahb  ::(add a new task)
+java -jar todo.jar -c 4 X        ::(check task id 4)
+java -jar todo.jar -c 4          ::(uncheck task id 4)
+java -jar todo.jar -g            ::(open gui window)
+java -jar todo.jar -h            ::(print online help)
+java -jar todo.jar -v            ::(show build version)
+```
 	
 ## technology
 * J2SE
