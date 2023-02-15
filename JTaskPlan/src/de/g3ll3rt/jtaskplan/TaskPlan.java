@@ -7,7 +7,11 @@ import java.text.SimpleDateFormat;
 
 public class TaskPlan {
   final String filename = "tasks.dat";
+  static private String version = "1.0";
   private ArrayList<Task> taskList = null;
+  public static String getVersion() {
+	  return version;
+  }
   public void readTasks() {
     try {
       if(new File(filename).exists()== false) { //Anlegen einer neuen Taskdatenbank wenn keine vorhanden
@@ -32,6 +36,7 @@ public class TaskPlan {
         tmpTask.setDate(splitted[1]);
         tmpTask.setDone(splitted[2].equals("1"));
         tmpTask.setErased(splitted[3].equals("1"));
+        tmpTask.setTaskId(taskList.size());
         taskList.add(tmpTask);
       }
       if (taskList.size() < 1) taskList = null;
@@ -78,6 +83,7 @@ public class TaskPlan {
 	  newTask.setDone(false);
 	  newTask.setErased(false);
 	  newTask.setMessage(msg);
+	  newTask.setTaskId( taskList.size());
 	  taskList.add(newTask);
 	}
   }

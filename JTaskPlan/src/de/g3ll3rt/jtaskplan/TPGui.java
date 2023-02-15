@@ -11,7 +11,7 @@ public class TPGui extends JFrame {
   TaskPlan taskplan = null;
  
   private JComboBox combobox1 = new JComboBox();
-  private JLabel label1 = new JLabel("   Statuszeile");
+  private JLabel label1 = new JLabel("V" + TaskPlan.getVersion());
   private JMenuBar menubar = new JMenuBar();
   private JMenu menu1 = new JMenu("JTaskPlan");
   private JMenu menu2 = new JMenu("Info");
@@ -43,8 +43,13 @@ public class TPGui extends JFrame {
     panel1.add(label1, BorderLayout.SOUTH);
     panel1.add(scrollPane, BorderLayout.CENTER);
     getContentPane().add(panel1);
-    Image img = getToolkit().getImage("jtaskplan/ico.gif");
-	setIconImage(img);
+
+//   Image img = getToolkit().getImage("ico.gif");
+//	setIconImage(img);
+	
+ //   URL url = ClassLoader.getSystemClassLoader().getResource("img/ico.gif");
+ //   Icon icon = new ImageIcon(url);   
+ //   setIconImage(icon);
     
     setTitle("JTaskPlan");
     setListeners();
@@ -96,8 +101,8 @@ public class TPGui extends JFrame {
     menuItem3.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
         	Object[] inputs = new Object[2];
-		  	inputs[0] = new JLabel("JTaskPlan V0.2");
-            inputs[1] = new JLabel("(c) 2006 Christian Gellert");
+		  	inputs[0] = new JLabel("JTaskPlan V" + TaskPlan.getVersion());
+            inputs[1] = new JLabel("Christian Gellert 2006 - 2023");
             JOptionPane.showOptionDialog(
             new JFrame(), inputs, "Version", 
             JOptionPane.CLOSED_OPTION, 
@@ -191,8 +196,10 @@ public class TPGui extends JFrame {
     }
   }
   
+  /*
   public static void main(String[] args) {
 	System.out.println("Hallo Welt");
     new TPGui();
   }
+  */
 }
