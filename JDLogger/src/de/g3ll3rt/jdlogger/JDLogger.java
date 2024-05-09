@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JDLogger {
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 		JDLogger logger = new JDLogger();
 		logger.executePollSeries(5, 60); 
 	}
