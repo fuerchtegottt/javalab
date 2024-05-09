@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class JDLogger {
 	public static void main(String[] args) {
 		JDLogger logger = new JDLogger();
-		logger.executePollSeries(5, 60);
+		logger.executePollSeries(5, 60); 
 	}
 
 	public void executeSinglePoll() {
