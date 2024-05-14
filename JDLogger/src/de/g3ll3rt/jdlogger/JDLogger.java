@@ -13,40 +13,56 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JDLogger {
-	public static void main(String[] args) { 
+	private final String version = "1.2";
+	public static void main(String[] args) {
 		JDLogger logger = new JDLogger();
-		logger.executePollSeries(5, 60);  
+		System.out.println("JDLogger V" + logger.getVersion());
+		// logger.executePollSeries(300, 60);
+		logger.executeSinglePoll();
 	}
 
+	/**
+	 * execute single poll
+	 */
 	public void executeSinglePoll() {
-		System.out.println("... FETCHING INVERTER DATA (" + getTimestamp() +")" );
+		System.out.println("... FETCHING INVERTER DATA (" + getTimestamp() + ")");
 		try {
-		String html = getHtmlString();
-		System.out.println("... PARSING DATA");
-		LogRecord rec = parseHTMLString(html, false);
-		System.out.println("    >>> POWER: " + rec.currentPower + " total YIELD: " + rec.totalYield);
-		System.out.println("... SENDING DATA TO WEB STORE");
-		} catch (java.net.ConnectException e ) {
+			String html = getHtmlString();
+			System.out.println("... PARSING DATA");
+			LogRecord rec = parseHTMLString(html, false);
+			System.out.println("    >>> POWER: " + rec.currentPower + " todays YIELD: " + rec.todayYield
+					+ " total YIELD: " + rec.totalYield);
+			System.out.println("... SENDING DATA TO WEB STORE");
+			uploadResult(rec);
+		} catch (IOException e) {
 			System.out.println("ERROR: inverter server timeout");
 		}
 	}
 	
 	/**
+	 * @return version number
+	 */
+	public String getVersion() {
+		return version;
+	}
+
+	/**
 	 * CAUTION: be gentle to the slow server and dont go below 60 sec. delay
+	 * 
 	 * @param iterations
 	 * @param delaySeconds
 	 */
 	public void executePollSeries(int iterations, int delaySeconds) {
 		for (int i = 0; i < iterations; i++) {
 			int actIteration = i + 1;
-			System.out.println("... SENDING REQUEST " + actIteration + " of " + iterations );
+			System.out.println("... SENDING REQUEST " + actIteration + " of " + iterations);
 			executeSinglePoll();
-			if (actIteration < iterations) {  //dont pause after last iteration
+			if (actIteration < iterations) { // dont pause after last iteration
 				try {
 					TimeUnit.SECONDS.sleep(delaySeconds);
 				} catch (InterruptedException e) {
-					//should not happen
-				}				
+					// should not happen
+				}
 			}
 		}
 		System.out.println("... SERIES FINISHED");
@@ -55,7 +71,7 @@ public class JDLogger {
 	/**
 	 * @return html get in a string
 	 */
-	public String getHtmlString() throws java.net.ConnectException {
+	public String getHtmlString() throws IOException {
 		String result = "";
 		try {
 			// String webPage = "http://192.168.2.66/status.html";
@@ -83,10 +99,35 @@ public class JDLogger {
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		return result;
+	}
+
+	/**
+	 * @param rec
+	 * @throws java.net.ConnectException
+	 * 
+	 *                                   send result record to REST service
+	 * 
+	 */
+	public void uploadResult(LogRecord rec) throws java.net.ConnectException {
+		if (rec.currentPower > 0) {  //suppress error values
+
+			String params = "/?power=" + rec.currentPower + "&totyield=" + rec.totalYield + "&actyield="
+					+ rec.todayYield;
+			String webPage = Settings.cloudRestUrl + params;
+			URL url;
+			try {
+				url = new URL(webPage);
+				URLConnection urlConnection = url.openConnection();
+				urlConnection.getInputStream();
+
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
@@ -108,7 +149,8 @@ public class JDLogger {
 			System.out.println("---HTML STRING END---");
 		}
 		String power = regexSearch("(?<=webdata_now_p = )\\d+", html); // e.g. webdata_now_p = 231;
-		String yield = regexSearch("(?<=webdata_total_e = )\\d+.\\d+", html); // e.g webdata_total_e = 2.8;
+		String totalYield = regexSearch("(?<=webdata_total_e = )\\d+.\\d+", html); // e.g webdata_total_e = 2.8;
+		String todayYield = regexSearch("(?<=webdata_today_e = )\\d+.\\d+", html); // e.g webdata_total_e = 2.8;
 
 		if (power != null) {
 			try {
@@ -118,13 +160,22 @@ public class JDLogger {
 			}
 		}
 
-		if (yield != null) {
+		if (totalYield != null) {
 			try {
-				rec.totalYield = Double.valueOf(yield);
+				rec.totalYield = Double.valueOf(totalYield);
 			} catch (NumberFormatException e) {
 				rec.totalYield = 0;
 			}
 		}
+
+		if (todayYield != null) {
+			try {
+				rec.todayYield = Double.valueOf(todayYield);
+			} catch (NumberFormatException e) {
+				rec.totalYield = 0;
+			}
+		}
+
 		return rec;
 	}
 
@@ -150,11 +201,22 @@ public class JDLogger {
 		}
 	}
 
+	/**
+	 * @return time stamp as string for console output
+	 */
 	private String getTimestamp() {
 		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
 		return timeStamp;
 	}
 
+	/**
+	 * @param regex
+	 * @param input
+	 * @return
+	 * 
+	 *         simple search routine to find the needed values within the html
+	 *         string
+	 */
 	public String regexSearch(String regex, String input) {
 		Matcher m = Pattern.compile(regex).matcher(input);
 		if (m.find())

@@ -1,0 +1,44 @@
+schedule on sunworker raspberry PI
+
+sudo su
+nano /etc/crontab
+
+* * * * * root java -jar /home/jdlog.jar
+
+
+__________________________________________________
+
+
+scheduled on minecraft server in docker (still not working)
+
+0. drop jar file on server and change auth
+chmod 777 jdlog.jar
+
+1. log in to minecraft container
+docker exec -it minecraft bash
+
+2. list cron jobs
+crontab -l
+
+3. edit cron jobs
+crontab -e
+
+4. add new job for command cd 
+(every 5 minutes)
+
+*/5 * * * * java -jar ~/../data/jdlog.jar > ~/../data/datelog.txt
+* * * * * java -jar ~/../data/jdlog.jar > ~/../data/datelog.txt
+* * * * * date > ~/../data/datelog.txt
+
+
+5. ps ax | grep cron .... -> checken, ob CRON läuft
+   service cron start oder service cron restart um CRON zu starten
+
+
+JAVA finden mit whereis java
+ /opt/java/openjdk/bin/java
+
+ 
+ sudo su -> wechseln zum root
+ 
+ 
