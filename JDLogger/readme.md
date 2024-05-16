@@ -31,6 +31,10 @@ reads state data from Deye Micro Inverter DEYE SUN 600 and writes it to console 
 - [ ] plot today with https://www.w3schools.com/ai/ai_chartjs.asp
 - [ ] calculate correct daily yield from summed power values
 
+## known errors
+- value "yield_today" not correct! (w/o internet, the ap does not recognize day change)
+(correct value is calculated in php frontend but not saved to database)
+
 **Christian Gellert**
 
 - [Profile](https://github.com/fuerchtegottt "Christian Gellert")
