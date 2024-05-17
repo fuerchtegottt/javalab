@@ -28,7 +28,7 @@ function download_send_headers($filename) {
   $results = @mysql_db_query($dbname, $sql_string, $connect);
   if ($results != null) {
 	download_send_headers("pv_data_export_" . date("Y-m-d") . ".csv");  
-	echo "timestamp; power; todays yield; total yield";
+	echo "date; time; power; todays yield; total yield; timestamp";
 	echo "\r\n";
     while($row = mysql_fetch_assoc($results)) {
 
@@ -37,13 +37,19 @@ function download_send_headers($filename) {
       $today_yield = preg_replace('/[.]/', ',', $row[2]);    /*$row[2];*/
 	  $total_yield = preg_replace('/[.]/', ',', $row[3]);    /*$row[3];*/
 	  $timestamp   = $row[0];
-      echo $timestamp;
+	  $out_date    = substr($timestamp, 0, 10);
+	  $out_time    = substr($timestamp, 11, 8);
+      echo $out_date;
+	  echo ";";
+	  echo $out_time;
 	  echo ";";
 	  echo $power;
 	  echo ";";
 	  echo $today_yield;
 	  echo ";";
 	  echo $total_yield;
+	  echo ";";	
+      echo $timestamp;	  
 	  echo "\r\n";
     }	
   } else {

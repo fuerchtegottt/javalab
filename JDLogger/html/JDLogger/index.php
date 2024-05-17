@@ -11,6 +11,16 @@
 	<title>JDLogger (PV Anlage)</title>
 </head>
 
+<!-- set logo image depending on online status -->
+<?php
+if ($is_online == 'X') {
+	$filename_logo = 'logo.gif';
+} else {
+	$filename_logo = 'logoOffline.jpg';
+	$power = 0;
+}
+?>
+
 <body>
   <div class = "blog">
 	<div class = "blogentry">
@@ -18,8 +28,8 @@
 	aktuelle Werte
 	</div>
 	  <div class = "entrydesc">
-	  <img src = "logo.gif"  width = "400em" alt = "Logo JDLogger"/>
-<table>
+	  <img src = "<?php echo $filename_logo; php?>"  width = "65%" alt = "Logo JDLogger"/>
+<table  >
   <tr>
     <th>akt. Leistung (W)</th>
     <th>Prod. heute (kWh)</th>
@@ -71,13 +81,13 @@ new Chart("myChart", {
 	  <div class = "entrydesc">
         <a href = "getCSV.php" > <img src = "csvIcon.png"  width = "100em" alt = "Download db (csv)"/> </a>
 	  </div>
-	</div>		
-	
-  </div>
   <div class = "footer">
    powered by
     <a href = "https://github.com/fuerchtegottt/javalab/tree/master/XMLBlog" >BlogKit Design </a> &
 	<a href = "https://www.chartjs.org" > chartsjs.org </a>
+  </div>	  
+	</div>		
+	
   </div>
 </body>
 </html>
