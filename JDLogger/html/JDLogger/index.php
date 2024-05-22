@@ -4,6 +4,7 @@
 <script src="Chart.js"></script>
 <?php require("fetchLatest.php"); php?>
 <head>
+<meta http-equiv="refresh" content="60">
 <link rel="icon" href="g3ll3rt.ico" type="image/vnd.microsoft.icon">
 	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 	<meta name="author" content="g3ll3rt.de">
@@ -66,7 +67,7 @@ new Chart("myChart", {
     legend: {display: false},	
     scales: {
       xAxes: [{ticks: {min: 5, max:23 }}],
-      yAxes: [{ticks: {min: 0, max:600 }}],
+      yAxes: [{ticks: {min: 0, max:650 }}],
     }
   }
 });

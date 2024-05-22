@@ -33,6 +33,8 @@
 	  }
 	  echo "];";
 	  echo "</script>";
+  } else {
+	  $no_recs_today = 'X';
   }
   
   /* - get yesterdays last record to get yesterdays total yield 
@@ -43,6 +45,11 @@
     $row = mysql_fetch_array($res_yest, MYSQL_NUM);
 	$today_yield  = $total_yield - $row[3];
     $ts_yest_last = $row[0];
+	if ($no_recs_today == 'X') {
+		$timestamp = $row[0];
+		$today_yield = '0';
+		$total_yield = $row[3];
+	}
   }	  
   
   mysql_close($connect);
@@ -50,14 +57,18 @@
   /* determine ONLINE status by comparing frontend timestamp with inverter timestamp 
      (if inverter timestamp is more than 5 minutes ago --> inverter offline)
   */  
-$now_frontend = new DateTime();
-$now_inverter = date_create_from_format('Y-m-d H:i:s', $timestamp);
-$tsdiff = date_diff($now_frontend, $now_inverter);
+if ($no_recs_today != 'X'){
+  $now_frontend = new DateTime();
+  $now_inverter = date_create_from_format('Y-m-d H:i:s', $timestamp);
+  $tsdiff = date_diff($now_frontend, $now_inverter);
 
-IF ($tsdiff->i > 5){
-  $is_online = '';
+  IF ($tsdiff->i > 5){
+    $is_online = '';
+  } else {
+    $is_online = 'X';
+  }  
 } else {
-  $is_online = 'X';
-}  
+  $is_online = '';
+}
   
 php?>
