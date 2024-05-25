@@ -73,7 +73,36 @@ new Chart("myChart", {
 });
 </script>
 	  </div>
+	</div>	
+
+	<div class = "blogentry">
+	<div class = "entryheader">
+	14-Tages-Trend (verg. Tage / Prod. in kWh)
 	</div>
+	  <div class = "entrydesc">
+  <canvas id="14DaysChart" style="width:100%;max-width:700px"></canvas>	  
+	  <script>
+new Chart("14DaysChart", {
+  type: "scatter",
+  data: {
+    datasets: [{
+      pointRadius: 4,
+      pointBackgroundColor: "rgb(0,0,255)",
+      data: weekValues
+    }]
+  },
+  options: {
+    legend: {display: false},	
+    scales: {
+      xAxes: [{ticks: {min: 1, max:14 }}],
+      yAxes: [{ticks: {min: 0, max:6 }}],
+    }
+  }
+});
+</script>
+	  </div>
+	</div>
+
 
 	<div class = "blogentry">
 	<div class = "entryheader">
