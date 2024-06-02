@@ -53,7 +53,7 @@
   }	  
   
   
-   /* - get daily production of last 7 days */
+   /* - get daily production of last 14 days */
    
 $daysBack = 14;
 $total_yield_old = $total_yield;
@@ -62,7 +62,8 @@ $i = 1;
 	  echo "<script>";
 	  echo "var weekValues = [";
 while ($i <= $daysBack):
-  $tag_ts       = mktime(0, 0, 0, date("m")  , date("d")-$i, date("Y"));
+  $y = $i + 1;
+  $tag_ts       = mktime(0, 0, 0, date("m")  , date("d")-$y, date("Y"));
   $tag_datum    = date("Y-m-d",$tag_ts);
   $sql_prod_day = "SELECT * FROM `jd_logger` WHERE date(timestamp ) = \"$tag_datum \" order by timestamp DESC limit 1 ;";
   $res_day = @mysql_db_query($dbname, $sql_prod_day, $connect);
