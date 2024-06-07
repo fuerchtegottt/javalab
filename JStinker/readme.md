@@ -2,7 +2,7 @@
 ![LOGO](res/stinkerLogo.png)
 
 # description 
-JAVA based Deye Inverter Connector
+JAVA based console tool to draw an ascii stinker saying something naughty
 
 ## purpose
 let the stinker say foul-mouthed things on your console
