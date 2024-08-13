@@ -13,27 +13,44 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JDLogger {
-	private final String version = "1.2";
+	private final String version = "1.3";
 	public static void main(String[] args) {
 		JDLogger logger = new JDLogger();
 		System.out.println("JDLogger V" + logger.getVersion());
 		// logger.executePollSeries(300, 60);
 		logger.executeSinglePoll();
 	}
+	
+	public void executeTestPoll( ) {
+		executeSinglePoll(true);
+	}
+	
+	public void executeSinglePoll( ) {
+		executeSinglePoll(false);
+	}
 
 	/**
 	 * execute single poll
+	 * added: test flag to skip to do test run
+	 * @todo: implement TEST MODE with handshake REST service 
 	 */
-	public void executeSinglePoll() {
+	private void executeSinglePoll( boolean testmode) {
 		System.out.println("... FETCHING INVERTER DATA (" + getTimestamp() + ")");
+		if(testmode == true) {
+			System.out.println("  (TESTMODE)    ");
+		}
 		try {
 			String html = getHtmlString();
 			System.out.println("... PARSING DATA");
 			LogRecord rec = parseHTMLString(html, false);
 			System.out.println("    >>> POWER: " + rec.currentPower + " todays YIELD: " + rec.todayYield
 					+ " total YIELD: " + rec.totalYield);
-			System.out.println("... SENDING DATA TO WEB STORE");
-			uploadResult(rec);
+			  if (testmode == false) {
+			    System.out.println("... SENDING DATA TO WEB STORE");
+			    uploadResult(rec, testmode);
+			  } else {
+				  System.out.println("... SKIPPING UPLOAD TO STORE");
+			  }
 		} catch (IOException e) {
 			System.out.println("ERROR: inverter server timeout");
 		}
@@ -52,11 +69,11 @@ public class JDLogger {
 	 * @param iterations
 	 * @param delaySeconds
 	 */
-	public void executePollSeries(int iterations, int delaySeconds) {
+	public void executePollSeries(int iterations, int delaySeconds, boolean testmode) {
 		for (int i = 0; i < iterations; i++) {
 			int actIteration = i + 1;
 			System.out.println("... SENDING REQUEST " + actIteration + " of " + iterations);
-			executeSinglePoll();
+			executeSinglePoll(testmode);
 			if (actIteration < iterations) { // dont pause after last iteration
 				try {
 					TimeUnit.SECONDS.sleep(delaySeconds);
@@ -110,7 +127,7 @@ public class JDLogger {
 	 *                                   send result record to REST service
 	 * 
 	 */
-	public void uploadResult(LogRecord rec) throws java.net.ConnectException {
+	public void uploadResult(LogRecord rec, boolean testmode) throws java.net.ConnectException {
 		if (rec.currentPower > 0) {  //suppress error values
 
 			String params = "/?power=" + rec.currentPower + "&totyield=" + rec.totalYield + "&actyield="

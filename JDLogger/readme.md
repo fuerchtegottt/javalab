@@ -30,9 +30,11 @@ reads state data from Deye Micro Inverter DEYE SUN 600 and writes it to console 
 - [x] export database into csv file
 - [x] plot today with https://www.w3schools.com/ai/ai_chartjs.asp
 - [x] calculate correct daily yield from summed power values
-- [ ] add date and time columns to export CSV
-- [ ] active flag in frontend variables (based on last transmission)
-- [ ] night logo (while inverter is inactive)
+- [x] add date and time columns to export CSV
+- [ ] active flag in frontend variables (based on last transmission) - known error at day bill
+- [x] night logo (while inverter is inactive)
+- [x] icon for web app
+- [x] 14-day-trend fetched and visualized with CHARTJS
 
 ## known errors
 - value "yield_today" not correct on db! (w/o internet, the ap does not recognize day change)
