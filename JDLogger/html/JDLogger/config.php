@@ -1,7 +1,11 @@
 <?php
    $host = "localhost";
-   $dbname = "usr_web286_1";
-   $user = "web286";
-   $pw = "**********";  
-   $connect = @mysql_connect($host, $user, $pw); 
+   $dbname = "g3ll3rt_test";
+   $user = "g3ll3rt_testu1";
+   $pw = "#######"; 
+   
+   $conn = mysqli_connect($host, $user, $pw, $dbname);   
+   if ($conn->connect_error) {
+     die("Connection failed: " . $conn->connect_error);
+   }  
 ?>
