@@ -1,4 +1,4 @@
-<?php
+<?
     /* fetch recent results into variables:
 	   $power
 	   $today_yield (must be calculated due to faulty values from inverter)
@@ -6,22 +6,28 @@
 	   $timestamp
 	*/
   require("config.php");
-  
     /* fetch todays array:
 	- select data
 	- build js array for values
 	- save last record in current variables*/
   $sql_str_today = "SELECT * FROM `jd_logger` WHERE date(timestamp ) = current_date order by timestamp ASC;";
   
-  $res_today = @mysql_db_query($dbname, $sql_str_today, $connect);
-  if ($res_today != null) {
+  $total_yield = 0;
+  $no_recs_today = "";
+  $power = 0;
+  $timestamp = "";
+  
+  $res_today = $conn->query($sql_str_today);
+  $rowcnt = 0;
+  $rowcnt = mysqli_num_rows($res_today);
+  if ($rowcnt > 0) {
 	  echo "<script>";
 	  echo "var xyValues = [";
-	  while ($row = mysql_fetch_array($res_today, MYSQL_NUM)) {
-	  	$power       = $row[1];
-	    $today_yield = $row[2];
-	    $total_yield = $row[3];
-	    $timestamp   = $row[0];
+	  while ($row = $res_today->fetch_assoc()) {
+	  	$power       = $row['power'];
+	    $today_yield = $row['today_yield'];
+	    $total_yield = $row['total_yield'];
+	    $timestamp   = $row['timestamp'];
 		
 		echo "{x:'";
 	    $time = substr($timestamp, 11, 5);
@@ -40,15 +46,15 @@
   /* - get yesterdays last record to get yesterdays total yield 
      - calculate todays yield by total today - totay yesterday */
   $sql_last_yest = "SELECT * FROM `jd_logger` WHERE date(timestamp ) < current_date order by timestamp DESC limit 1 ;";  	 
-  $res_yest = @mysql_db_query($dbname, $sql_last_yest, $connect);
+  $res_yest = $conn->query($sql_last_yest);
   if ($res_yest != null) {
-    $row = mysql_fetch_array($res_yest, MYSQL_NUM);
-	$today_yield  = $total_yield - $row[3];
-    $ts_yest_last = $row[0];
+    $row = $res_yest->fetch_assoc();
+	$today_yield  = $total_yield - $row['total_yield'];
+    $ts_yest_last = $row['timestamp'];
 	if ($no_recs_today == 'X') {
-		$timestamp = $row[0];
+		$timestamp = $row['timestamp'];
 		$today_yield = '0';
-		$total_yield = $row[3];
+		$total_yield = $row['total_yield'];
 	}
   }	  
   
@@ -66,11 +72,11 @@ while ($i <= $daysBack):
   $tag_ts       = mktime(0, 0, 0, date("m")  , date("d")-$y, date("Y"));
   $tag_datum    = date("Y-m-d",$tag_ts);
   $sql_prod_day = "SELECT * FROM `jd_logger` WHERE date(timestamp ) = \"$tag_datum \" order by timestamp DESC limit 1 ;";
-  $res_day = @mysql_db_query($dbname, $sql_prod_day, $connect);
+  $res_day = $conn->query($sql_prod_day);
 
   if ($res_day != null) {
-    $row = mysql_fetch_array($res_day, MYSQL_NUM);
-    $total_yield_day = $row[3];	
+    $row = $res_day->fetch_assoc();
+    $total_yield_day = $row['total_yield'];	
     $day_yield = $total_yield_old - $total_yield_day;	
 	$total_yield_old = $total_yield_day;
    echo "{x:'";
@@ -86,10 +92,7 @@ endwhile;
 	  echo "];";
 	  echo "</script>";   
    
-  
-  
-  
-  mysql_close($connect);
+  $conn->close(); 
   
   /* determine ONLINE status by comparing frontend timestamp with inverter timestamp 
      (if inverter timestamp is more than 5 minutes ago --> inverter offline)
@@ -107,5 +110,9 @@ if ($no_recs_today != 'X'){
 } else {
   $is_online = '';
 }
-  
-php?>
+// fix negative yield total bug
+  if ($today_yield < 0 ){
+    $today_yield = 0;
+  }
+  $today_yield = round($today_yield, 3);
+?>

@@ -2,7 +2,7 @@
 <html>
 <!-- {%https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js} -->
 <script src="Chart.js"></script>
-<?php require("fetchLatest.php"); php?>
+<? require("fetchLatest.php"); ?>
 <head>
 <meta http-equiv="refresh" content="60">
 <link rel="icon" href="pvicon.ico" type="image/vnd.microsoft.icon">
@@ -13,7 +13,7 @@
 </head>
 
 <!-- set logo image depending on online status -->
-<?php
+<?
 if ($is_online == 'X') {
 	$filename_logo = 'logo.gif';
 } else {
@@ -29,7 +29,7 @@ if ($is_online == 'X') {
 	aktuelle Werte
 	</div>
 	  <div class = "entrydesc">
-	  <img src = "<?php echo $filename_logo; php?>"  width = "65%" alt = "Logo JDLogger"/>
+	  <img src = "<? echo $filename_logo; ?>"  width = "65%" alt = "Logo JDLogger"/>
 <table  >
   <tr>
     <th>akt. Leistung (W)</th>
@@ -38,10 +38,10 @@ if ($is_online == 'X') {
     <th>Timestamp</th>	
   </tr>
   <tr>
-    <td><?php echo $power; php?></td>
-    <td><?php echo $today_yield; php?></td>
-	<td><?php echo $total_yield; php?></td>
-    <td><?php echo $timestamp; php?></td>	
+    <td><? echo $power; ?></td>
+    <td><? echo $today_yield; ?></td>
+	<td><? echo $total_yield; ?></td>
+    <td><? echo $timestamp; ?></td>	
    </tr>
 </table>
 	  </div>
@@ -112,7 +112,7 @@ new Chart("14DaysChart", {
         <a href = "getCSV.php" > <img src = "csvIcon.png"  width = "100em" alt = "Download db (csv)"/> </a>
 	  </div>
   <div class = "footer">
-   powered by
+   web node V2.0 powered by
     <a href = "https://github.com/fuerchtegottt/javalab/tree/master/XMLBlog" >BlogKit Design </a> &
 	<a href = "https://www.chartjs.org" > chartsjs.org </a>
   </div>	  

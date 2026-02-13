@@ -1,4 +1,4 @@
-<?php
+<?
     /* fetch recent results into variables:
 	   $power
 	   $today_yield
@@ -25,18 +25,19 @@ function download_send_headers($filename) {
 }
   
   $sql_string = "SELECT * FROM `jd_logger` order by timestamp DESC;";  
-  $results = @mysql_db_query($dbname, $sql_string, $connect);
-  if ($results != null) {
+  $results = $conn->query($sql_string);
+  $rowcnt = 0;
+  $rowcnt = mysqli_num_rows($results);
+  if ($rowcnt > 0) {
 	download_send_headers("pv_data_export_" . date("Y-m-d") . ".csv");  
 	echo "date; time; power; todays yield; total yield; timestamp";
 	echo "\r\n";
-    while($row = mysql_fetch_assoc($results)) {
+    while($row = $results->fetch_assoc()) {
 
-	  $row = mysql_fetch_array($results, MYSQL_NUM);
-	  $power       = $row[1];
-      $today_yield = preg_replace('/[.]/', ',', $row[2]);    /*$row[2];*/
-	  $total_yield = preg_replace('/[.]/', ',', $row[3]);    /*$row[3];*/
-	  $timestamp   = $row[0];
+	  $power       = $row['power'];
+      $today_yield = preg_replace('/[.]/', ',', $row['today_yield']);    /*$row[2];*/
+	  $total_yield = preg_replace('/[.]/', ',', $row['total_yield']);    /*$row[3];*/
+	  $timestamp   = $row['timestamp'];
 	  $out_date    = substr($timestamp, 0, 10);
 	  $out_time    = substr($timestamp, 11, 8);
       echo $out_date;
@@ -55,5 +56,5 @@ function download_send_headers($filename) {
   } else {
     echo "DB FETCH ERROR";
   }
-  mysql_close($connect);
-php?>
+  $conn->close(); 
+?>
