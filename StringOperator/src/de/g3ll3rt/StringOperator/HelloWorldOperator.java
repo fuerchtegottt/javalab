@@ -10,7 +10,7 @@ public class HelloWorldOperator implements StringOperationBase {
 	@Override
 	public String execute(String output) throws Exception {
 		// TODO Auto-generated method stub
-		return "Hello, " + output;
+		return "Hello , " + output;
 	}
 
 	@Override
