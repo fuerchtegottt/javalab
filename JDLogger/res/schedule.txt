@@ -42,3 +42,7 @@ JAVA finden mit whereis java
  sudo su -> wechseln zum root
  
  
+ replace jars:
+
+sudo mv jdlog.jar jdlog.old
+sudo mv jdlog.new jdlog.new
