@@ -15,7 +15,7 @@ import java.awt.event.*;
 public class Zahlenratespiel extends Frame implements ActionListener {
 
     private static final int MIN = 1;
-    private static final int MAX = 100;
+    private static final int MAX = 1000;
     private static final int MAX_VERSUCHE = 10;
 
     private int gesuchteZahl;
